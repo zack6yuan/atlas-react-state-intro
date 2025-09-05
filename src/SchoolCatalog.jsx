@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function SchoolCatalog() {
+
+
+
+
   return (
     <div className="school-catalog">
       <h1>School Catalog</h1>
@@ -17,16 +21,6 @@ export default function SchoolCatalog() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>PP1000</td>
-            <td>Beginning Procedural Programming</td>
-            <td>2</td>
-            <td>30</td>
-            <td>
-              <button>Enroll</button>
-            </td>
-          </tr>
           <tr>
             <td>1</td>
             <td>PP1100</td>
