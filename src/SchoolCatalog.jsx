@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function SchoolCatalog() {
+    const [course, setCourse] = useState([]);
+    /*
+    const [loading, setLoading] = useState(true);
+    */
 
-
-
+    useEffect(() => {
+        fetch("/api/courses.json")
+        .then((response) => response.json())
+        .then((data) => setCourse(data))
+    }, []);
 
   return (
     <div className="school-catalog">
@@ -21,26 +28,16 @@ export default function SchoolCatalog() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>PP1100</td>
-            <td>Basic Procedural Programming</td>
-            <td>4</td>
-            <td>50</td>
-            <td>
-              <button>Enroll</button>
-            </td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>OS1000</td>
-            <td>Fundamentals of Open Source Operating Systems</td>
-            <td>2.5</td>
-            <td>37.5</td>
-            <td>
-              <button>Enroll</button>
-            </td>
-          </tr>
+            {course.map((course) => (
+            <tr>
+                <td>{course.trimester}</td>
+                <td>{course.courseNumber}</td>
+                <td>{course.courseName}</td>
+                <td>{course.semesterCredits}</td>
+                <td>{course.totalClockHours}</td>
+                <td><button>Enroll</button></td>
+            </tr>
+        ))}
         </tbody>
       </table>
       <div className="pagination">
