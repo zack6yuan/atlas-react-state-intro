@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 export default function SchoolCatalog() {
     const [course, setCourse] = useState([]);
+    const [filter, setFilter] = useState("");
     /*
+    const filteredData = data.filter((item) => item.startsWith(filter));
     const [loading, setLoading] = useState(true);
     */
 
@@ -15,7 +17,7 @@ export default function SchoolCatalog() {
   return (
     <div className="school-catalog">
       <h1>School Catalog</h1>
-      <input type="text" placeholder="Search" />
+      <input type="text" onChange={(e) => setFilter(e.target.value)} placeholder="Search" />
       <table>
         <thead>
           <tr>
@@ -26,7 +28,7 @@ export default function SchoolCatalog() {
             <th>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
-        </thead>
+        </thead> 
         <tbody>
             {course.map((course) => (
             <tr>
