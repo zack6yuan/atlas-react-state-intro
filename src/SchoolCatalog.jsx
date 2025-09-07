@@ -1,23 +1,34 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function SchoolCatalog() {
-    const [course, setCourse] = useState([]);
-    const [filter, setFilter] = useState("");
-    /*
-    const filteredData = data.filter((item) => item.startsWith(filter));
-    const [loading, setLoading] = useState(true);
-    */
+  /*
+    state --> component's memory, causes UI to update when changed
+    declare state using destructuring + useState hook
+    syntax --> [state, function updating the value] = useState(initial value)
+*/
+  const [course, setCourse] = useState([]);
+  const [filter, setFilter] = useState("");
 
-    useEffect(() => {
-        fetch("/api/courses.json")
-        .then((response) => response.json())
-        .then((data) => setCourse(data))
-    }, []);
+  // fetch data from api with useEffect
+  useEffect(() => {
+    fetch("/api/courses.json")
+      .then((response) => response.json())
+      .then((data) => setCourse(data));
+  }, []);
+
+  // filter data based on filter value
+  const filteredData = course.filter((item) =>
+    item.toString().startsWith(filter),
+  );
 
   return (
     <div className="school-catalog">
       <h1>School Catalog</h1>
-      <input type="text" onChange={(e) => setFilter(e.target.value)} placeholder="Search" />
+      <input
+        type="text"
+        placeholder="Search"
+        onChange={(e) => setFilter(e.target.value)}
+      />
       <table>
         <thead>
           <tr>
@@ -28,18 +39,20 @@ export default function SchoolCatalog() {
             <th>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
-        </thead> 
+        </thead>
         <tbody>
-            {course.map((course) => (
-            <tr>
-                <td>{course.trimester}</td>
-                <td>{course.courseNumber}</td>
-                <td>{course.courseName}</td>
-                <td>{course.semesterCredits}</td>
-                <td>{course.totalClockHours}</td>
-                <td><button>Enroll</button></td>
+          {filteredData.map((item) => (
+            <tr key={item.courseNumber}>
+              <td>{item.trimester}</td>
+              <td>{item.courseNumber}</td>
+              <td>{item.courseName}</td>
+              <td>{item.semesterCredits}</td>
+              <td>{item.totalClockHours}</td>
+              <td>
+                <button>Enroll</button>
+              </td>
             </tr>
-        ))}
+          ))}
         </tbody>
       </table>
       <div className="pagination">
