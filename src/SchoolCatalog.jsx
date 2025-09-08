@@ -10,6 +10,11 @@ export default function SchoolCatalog() {
   const [filter, setFilter] = useState("");
 
   // fetch data from api with useEffect
+  /*
+    .then --> fetch happens asynchronously
+    api response --> JSON data
+    setCourse function --> update state of "course"
+  */
   useEffect(() => {
     fetch("/api/courses.json")
       .then((response) => response.json())
