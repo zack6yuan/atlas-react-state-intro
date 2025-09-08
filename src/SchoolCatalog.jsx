@@ -12,6 +12,8 @@ export default function SchoolCatalog() {
   const [course, setCourse] = useState([]);
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
+  // Need to implement sort
+  const [sort, setSort] = useState("label");
 
   /*
     fetch data from api with useEffect
@@ -53,7 +55,7 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th>Trimester</th>
+            <th onClick={() => setSort("label")}>Trimester</th>
             <th>Course Number</th>
             <th>Courses Name</th>
             <th>Semester Credits</th>
