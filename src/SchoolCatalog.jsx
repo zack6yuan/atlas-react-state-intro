@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 
+// define number of items that are shown on the page
+const PAGE_SIZE = 5;
+
 export default function SchoolCatalog() {
   /*
     state --> component's memory, causes UI to update when changed
@@ -8,12 +11,13 @@ export default function SchoolCatalog() {
 */
   const [course, setCourse] = useState([]);
   const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
 
-  // fetch data from api with useEffect
   /*
+    fetch data from api with useEffect
     .then --> fetch happens asynchronously
     api response --> JSON data
-    setCourse function --> update state of "course"
+    setCourse() --> update state of "course"
   */
   useEffect(() => {
     fetch("/api/courses.json")
@@ -21,9 +25,21 @@ export default function SchoolCatalog() {
       .then((data) => setCourse(data));
   }, []);
 
+  // array slice method --> selects a subset of the course array
+  // PAGE_SIZE ---> how many items are displayed on the page, defined at the top
+  const currentPage = course.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  /*
+    disable buttons for previous and next
+    first page --> previous disabled
+    last page --> next disabled
+  */
+  const hasMore = course.length > page * PAGE_SIZE;
+  const hasLess = page > 1;
+
   // filter data based on filter value
   const filteredData = course.filter((item) =>
-    item.toString().startsWith(filter),
+    item.toString().startsWith(filter)
   );
 
   return (
@@ -46,7 +62,7 @@ export default function SchoolCatalog() {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((item) => (
+          {currentPage.map((item) => (
             <tr key={item.courseNumber}>
               <td>{item.trimester}</td>
               <td>{item.courseNumber}</td>
@@ -61,8 +77,8 @@ export default function SchoolCatalog() {
         </tbody>
       </table>
       <div className="pagination">
-        <button>Previous</button>
-        <button>Next</button>
+        <button disabled={!hasLess} onClick={() => setPage(page - 1)}>Previous</button>
+        <button disabled={!hasMore} onClick={() => setPage(page + 1)}>Next</button>
       </div>
     </div>
   );
