@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from './App';
 
 // define number of items that are shown on the page
 const PAGE_SIZE = 5;
@@ -14,6 +15,8 @@ export default function SchoolCatalog() {
   const [page, setPage] = useState(1);
   // Need to implement sort
   const [sort, setSort] = useState("label");
+
+  const { studentEnroll } = useContext(AppContext);
 
   /*
     fetch data from api with useEffect
@@ -72,7 +75,7 @@ export default function SchoolCatalog() {
               <td>{item.semesterCredits}</td>
               <td>{item.totalClockHours}</td>
               <td>
-                <button>Enroll</button>
+                <button onClick={studentEnroll}>Enroll</button>
               </td>
             </tr>
           ))}

@@ -1,4 +1,10 @@
+import { useState, useContext } from 'react';
+import { AppContext } from './App';
+
 export default function ClassSchedule() {
+
+    const { studentDrop } = useContext(AppContext);
+
   return (
     <div className="class-schedule">
       <h1>Class Schedule</h1>
@@ -15,7 +21,7 @@ export default function ClassSchedule() {
             <td>OS1000</td>
             <td>Fundamentals of Open Source Operating Systems</td>
             <td>
-              <button>Drop</button>
+              <button onClick={studentDrop}>Drop</button>
             </td>
           </tr>
         </tbody>
