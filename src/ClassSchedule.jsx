@@ -3,7 +3,7 @@ import { AppContext } from './App';
 
 export default function ClassSchedule() {
 
-    const { studentDrop } = useContext(AppContext);
+const { studentDrop } = useContext(AppContext);
 
   return (
     <div className="class-schedule">

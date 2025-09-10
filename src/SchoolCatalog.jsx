@@ -16,7 +16,7 @@ export default function SchoolCatalog() {
   // Need to implement sort
   const [sort, setSort] = useState("label");
 
-  const { studentEnroll } = useContext(AppContext);
+  const { enroll, studentEnroll, studentDrop } = useContext(AppContext);
 
   /*
     fetch data from api with useEffect
@@ -43,7 +43,7 @@ export default function SchoolCatalog() {
   const hasLess = page > 1;
 
   // filter data based on filter value
-
+  const filteredData = course.filter((item) => item.courseName.startsWith(filter));
 
   return (
     <div className="school-catalog">
