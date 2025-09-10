@@ -30,20 +30,20 @@ export default function SchoolCatalog() {
       .then((data) => setCourse(data));
   }, []);
 
+  // filter data based on filter value
+  const filteredData = course.filter((item) => item.courseName.toLowerCase().startsWith(filter));
+
   // array slice method --> selects a subset of the course array
   // PAGE_SIZE ---> how many items are displayed on the page, defined at the top
-  const currentPage = course.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const currentPage = filteredData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   /*
     disable buttons for previous and next
     first page --> previous disabled
     last page --> next disabled
   */
-  const hasMore = course.length > page * PAGE_SIZE;
+  const hasMore = filteredData.length > page * PAGE_SIZE;
   const hasLess = page > 1;
-
-  // filter data based on filter value
-  const filteredData = course.filter((item) => item.courseName.startsWith(filter));
 
   return (
     <div className="school-catalog">
