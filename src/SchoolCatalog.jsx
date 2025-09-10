@@ -14,9 +14,9 @@ export default function SchoolCatalog() {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   // Need to implement sort
-  const [sort, setSort] = useState("label");
+  const [sort, setSort] = useState("trimester");
 
-  const { enroll, studentEnroll, studentDrop } = useContext(AppContext);
+  const { studentEnroll  } = useContext(AppContext);
 
   /*
     fetch data from api with useEffect
@@ -33,9 +33,16 @@ export default function SchoolCatalog() {
   // filter data based on filter value
   const filteredData = course.filter((item) => item.courseName.toLowerCase().startsWith(filter));
 
+  // sort data with click of table header
+  const sortedData = filteredData.sort((a, b) => {
+    if (sort === "trimester") {
+        return a.trimester.localeCompare(b.trimester)
+    }
+  })
+
   // array slice method --> selects a subset of the course array
   // PAGE_SIZE ---> how many items are displayed on the page, defined at the top
-  const currentPage = filteredData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const currentPage = sortedData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   /*
     disable buttons for previous and next
@@ -56,11 +63,11 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th>Trimester</th>
-            <th>Course Number</th>
-            <th>Courses Name</th>
-            <th>Semester Credits</th>
-            <th>Total Clock Hours</th>
+            <th onClick={() => setSort("trimester")}>Trimester</th>
+            <th onClick={() => setSort("courseNumber")}>Course Number</th>
+            <th onClick={() => setSort("courseName")}>Courses Name</th>
+            <th onClick={() => setSort("semesterCredits")}>Semester Credits</th>
+            <th onClick={() => setSort("totalClockHours")}>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
         </thead>
@@ -90,3 +97,4 @@ export default function SchoolCatalog() {
     </div>
   );
 }
+

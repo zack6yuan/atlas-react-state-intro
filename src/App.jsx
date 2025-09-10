@@ -10,7 +10,7 @@ export default function App() {
   const [enroll, setEnroll] = useState(false);
 
     function studentEnroll() {
-        setEnroll(true);
+        setEnroll(true)
     }
 
     function studentDrop() {
