@@ -3,6 +3,7 @@ import { AppContext } from './App';
 
 export default function ClassSchedule() {
 
+const { enrolledClasses } = useContext(AppContext);
 const { studentDrop } = useContext(AppContext);
 
   return (
@@ -17,13 +18,15 @@ const { studentDrop } = useContext(AppContext);
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>OS1000</td>
-            <td>Fundamentals of Open Source Operating Systems</td>
-            <td>
-              <button onClick={studentDrop}>Drop</button>
-            </td>
-          </tr>
+            {enrolledClasses.map((item) => (
+                <tr key={item.courseNumber}>
+                    <td>{item.courseNumber}</td>
+                    <td>{item.courseName}</td>
+                    <td>
+                        <button onClick={() => studentDrop(item)}>Drop</button>
+                    </td>
+                </tr>
+            ))}
         </tbody>
       </table>
     </div>

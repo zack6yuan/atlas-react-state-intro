@@ -14,7 +14,8 @@ export default function SchoolCatalog() {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("trimester");
-  const { studentEnroll  } = useContext(AppContext);
+
+  const { studentEnroll }  = useContext(AppContext);
 
   /*
     fetch data from api with useEffect
@@ -73,7 +74,7 @@ export default function SchoolCatalog() {
               <td>{item.semesterCredits}</td>
               <td>{item.totalClockHours}</td>
               <td>
-                <button onClick={studentEnroll}>Enroll</button>
+                <button onClick={() => studentEnroll(item)}>Enroll</button>
               </td>
             </tr>
           ))}
