@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { AppContext } from './App';
+import { AppContext } from "./App";
 
 // define number of items that are shown on the page
 const PAGE_SIZE = 5;
@@ -43,9 +43,7 @@ export default function SchoolCatalog() {
   const hasLess = page > 1;
 
   // filter data based on filter value
-  const filteredData = course.filter((item) =>
-    item.toString().startsWith(filter)
-  );
+
 
   return (
     <div className="school-catalog">
@@ -58,7 +56,7 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th onClick={() => setSort("label")}>Trimester</th>
+            <th>Trimester</th>
             <th>Course Number</th>
             <th>Courses Name</th>
             <th>Semester Credits</th>
@@ -82,8 +80,12 @@ export default function SchoolCatalog() {
         </tbody>
       </table>
       <div className="pagination">
-        <button disabled={!hasLess} onClick={() => setPage(page - 1)}>Previous</button>
-        <button disabled={!hasMore} onClick={() => setPage(page + 1)}>Next</button>
+        <button disabled={!hasLess} onClick={() => setPage(page - 1)}>
+          Previous
+        </button>
+        <button disabled={!hasMore} onClick={() => setPage(page + 1)}>
+          Next
+        </button>
       </div>
     </div>
   );

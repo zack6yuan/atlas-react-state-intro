@@ -1,8 +1,8 @@
+import { createContext, useState } from "react";
+
 import Header from "./Header";
 import SchoolCatalog from "./SchoolCatalog";
 import ClassSchedule from "./ClassSchedule";
-
-import { createContext, useState } from "react";
 
 export const AppContext = createContext();
 
