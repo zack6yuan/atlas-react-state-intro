@@ -13,7 +13,7 @@ export default function SchoolCatalog() {
   const [course, setCourse] = useState([]);
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-
+  const [sort, setSort] = useState("trimester");
   const { studentEnroll  } = useContext(AppContext);
 
   /*
@@ -28,8 +28,8 @@ export default function SchoolCatalog() {
       .then((data) => setCourse(data));
   }, []);
 
-  // filter data based on filter value
-  const filteredData = course.filter((item) => item.courseName.toLowerCase().startsWith(filter));
+  // filter data based on filter value, regardless of LowerCase or UpperCase
+  const filteredData = course.filter((item) => item.courseName.toLowerCase().startsWith(filter.toLowerCase()));
 
   // sort data on click of the header
 
@@ -56,7 +56,7 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
-            <th>Trimester</th>
+            <th onClick={() => setSort("trimester")}>Trimester</th>
             <th>Course Number</th>
             <th>Courses Name</th>
             <th>Semester Credits</th>
