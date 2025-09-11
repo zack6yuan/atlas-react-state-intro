@@ -20,7 +20,7 @@ export default function App() {
     }
 
     function studentDrop() {
-        setEnroll("false");
+        setEnroll(false);
     }
 
 // Context provider --> solves prop drilling
