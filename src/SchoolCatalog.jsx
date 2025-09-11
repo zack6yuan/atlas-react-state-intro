@@ -6,7 +6,7 @@ const PAGE_SIZE = 5;
 
 // School catalog component
 export default function SchoolCatalog() {
-  /*65trfdxfd
+  /*
     state --> component's memory, causes UI to update when changed
     declare state using destructuring + useState hook
     syntax --> [state, function updating the value] = useState(initial value)
