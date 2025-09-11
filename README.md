@@ -1,5 +1,9 @@
 # React State Introduction
 
+### This is an introduction to "state" in React. What is it?
+* State is a JavaScript object that holds data that a component needs to "remember" and that can change over time
+* It makes your user interface dynamic and interactive
+
 ## Getting Started
 
 - Run `npm install` to install dependencies
