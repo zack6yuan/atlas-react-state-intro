@@ -22,8 +22,13 @@ export default function App() {
 
     function studentDrop(course) {
         // removes class from the enrolledClasses array
+        // creates a new list, check if that course is in memory
         setEnroll(false);
-        setEnrolledClasses(beforeState => [...beforeState, course]);
+        setEnrolledClasses(beforeState => {
+            return beforeState.filter(
+                enrolledClasses => enrolledClasses !== course
+            );
+        })
     }
 
 // Context provider --> solves prop drilling
