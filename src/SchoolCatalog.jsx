@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "./App";
 
-// define number of items that are shown on the page
+// define number of items shown on the page (pagination)
 const PAGE_SIZE = 5;
 
+// School catalog component
 export default function SchoolCatalog() {
   /*
     state --> component's memory, causes UI to update when changed
@@ -15,28 +16,28 @@ export default function SchoolCatalog() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("trimester");
 
-  const { studentEnroll }  = useContext(AppContext);
+  const { studentEnroll } = useContext(AppContext);
 
-  /*
-    fetch data from api with useEffect
-    .then --> fetch happens asynchronously
-    api response --> JSON data
-    setCourse() --> update state of "course"
-  */
+  // fetch data from api with useEffect
   useEffect(() => {
     fetch("/api/courses.json")
       .then((response) => response.json())
       .then((data) => setCourse(data));
   }, []);
 
-  // filter data based on filter value, regardless of LowerCase or UpperCase
-  const filteredData = course.filter((item) => item.courseName.toLowerCase().startsWith(filter.toLowerCase()));
+  // filter data based on filter value, regardless of case
+  const filteredData = course.filter((item) =>
+    item.courseName.toLowerCase().startsWith(filter.toLowerCase())
+  );
 
   // sort data on click of the header
 
+
   // array slice method --> selects a subset of the course array
-  // PAGE_SIZE ---> how many items are displayed on the page, defined at the top
-  const currentPage = filteredData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const currentPage = filteredData.slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE
+  );
 
   /*
     disable buttons for previous and next
@@ -57,11 +58,12 @@ export default function SchoolCatalog() {
       <table>
         <thead>
           <tr>
+            {/* Still need to implement sort functionality */}
             <th onClick={() => setSort("trimester")}>Trimester</th>
-            <th>Course Number</th>
-            <th>Courses Name</th>
-            <th>Semester Credits</th>
-            <th>Total Clock Hours</th>
+            <th onClick={() => setSort("courseNumber")}>Course Number</th>
+            <th onClick={() => setSort("courseName")}>Courses Name</th>
+            <th onClick={() => setSort("semesterCredits")}>Semester Credits</th>
+            <th onClick={() => setSort("totalClockHours")}>Total Clock Hours</th>
             <th>Enroll</th>
           </tr>
         </thead>
@@ -91,4 +93,3 @@ export default function SchoolCatalog() {
     </div>
   );
 }
-

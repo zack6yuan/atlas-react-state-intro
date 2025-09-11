@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+// component imports
 import Header from "./Header";
 import SchoolCatalog from "./SchoolCatalog";
 import ClassSchedule from "./ClassSchedule";
@@ -8,6 +9,7 @@ import ClassSchedule from "./ClassSchedule";
 // solves prop drilling, so that data can be passed through components
 export const AppContext = createContext();
 
+// App component
 export default function App() {
   // useState --> initial value (false)
   const [enroll, setEnroll] = useState(false);
@@ -33,7 +35,10 @@ export default function App() {
     }
 
 // Context provider --> solves prop drilling --> wraps components
-// Data is accessible by any component defined in the context
+/* 
+    Data is accessible by any component defined in the context
+    --> enroll, studentEnroll, studentDrop, and enrolledClasses
+*/
   return (
     <AppContext.Provider value={{ enroll, studentEnroll, studentDrop, enrolledClasses }}>
       <div>

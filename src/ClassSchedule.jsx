@@ -1,8 +1,10 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext } from './App';
 
+// Class schedule component
 export default function ClassSchedule() {
 
+// context to access the enrolled classes and drop functionality
 const { enrolledClasses } = useContext(AppContext);
 const { studentDrop } = useContext(AppContext);
 
@@ -18,6 +20,7 @@ const { studentDrop } = useContext(AppContext);
           </tr>
         </thead>
         <tbody>
+            {/* Return the enrolled classes in the class schedule */}
             {enrolledClasses.map((item) => (
                 <tr key={item.courseNumber}>
                     <td>{item.courseNumber}</td>
