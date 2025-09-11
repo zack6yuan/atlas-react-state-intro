@@ -12,15 +12,18 @@ export default function App() {
   const [enroll, setEnroll] = useState(false);
   // useState --> initial value ([] (empty array))
   const [enrolledClasses, setEnrolledClasses] = useState([])
-
+  
     function studentEnroll(course) {
         // add class to the enrolledClasses array
         // spread operator --> takes the previous classes, and creates a new array with the new item added
-        setEnrolledClasses(previous => [...previous, course])
+        setEnroll(true);
+        setEnrolledClasses(beforeState => [...beforeState, course]);
     }
 
-    function studentDrop() {
+    function studentDrop(course) {
+        // removes class from the enrolledClasses array
         setEnroll(false);
+        setEnrolledClasses(beforeState => [...beforeState, course]);
     }
 
 // Context provider --> solves prop drilling

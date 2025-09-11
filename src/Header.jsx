@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { AppContext } from "./App";
 import logo from "./assets/logo.png";
+
+
 
 export default function Header() {
   return (
