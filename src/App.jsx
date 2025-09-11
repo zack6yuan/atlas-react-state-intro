@@ -5,6 +5,7 @@ import SchoolCatalog from "./SchoolCatalog";
 import ClassSchedule from "./ClassSchedule";
 
 // context provider -- AppContext
+// solves prop drilling, so that data can be passed through components
 export const AppContext = createContext();
 
 export default function App() {
@@ -22,7 +23,7 @@ export default function App() {
 
     function studentDrop(course) {
         // removes class from the enrolledClasses array
-        // creates a new list, check if that course is in memory
+        // compare the course to drop with the courses in the enrolledClasses list
         setEnroll(false);
         setEnrolledClasses(beforeState => {
             return beforeState.filter(
@@ -31,7 +32,7 @@ export default function App() {
         })
     }
 
-// Context provider --> solves prop drilling
+// Context provider --> solves prop drilling --> wraps components
 // Data is accessible by any component defined in the context
   return (
     <AppContext.Provider value={{ enroll, studentEnroll, studentDrop, enrolledClasses }}>
