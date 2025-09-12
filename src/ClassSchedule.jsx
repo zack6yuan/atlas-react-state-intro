@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from './App';
+import { Header } from './Header';
 
 // Class schedule component
 export default function ClassSchedule() {
